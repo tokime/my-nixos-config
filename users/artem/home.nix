@@ -92,46 +92,6 @@
   programs.home-manager.enable = true;
   programs.noctalia.enable = true;
 
-  programs.swaylock = {
-    enable = true;
-    package = pkgs.swaylock-effects;
-    settings = {
-      screenshots = true;
-      effect-blur = "7x5";
-      effect-scale = 0.5;
-      indicator-caps-lock = true;
-      color = "000000aa";
-      font-size = 24;
-
-      ring-color = "2e3440";
-      ring-ver-color = "88c0d0";
-      ring-wrong-color = "bf616a";
-      ring-clear-color = "ebcb8b";
-      ring-capslock-color = "d08770";
-
-      key-hl-color = "88c0d0";
-      bs-hl-color = "bf616a";
-
-      text-color = "eceff4";
-      text-ver-color = "88c0d0";
-      text-wrong-color = "bf616a";
-      text-clear-color = "ebcb8b";
-      text-capslock-color = "d08770";
-
-      line-color = "00000000";
-      separator-color = "00000000";
-
-      inside-color = "2e3440cc";
-      inside-ver-color = "2e3440cc";
-      inside-wrong-color = "2e3440cc";
-      inside-clear-color = "2e3440cc";
-      inside-capslock-color = "2e3440cc";
-
-      indicator-radius = 120;
-      indicator-thickness = 10;
-    };
-  };
-
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
