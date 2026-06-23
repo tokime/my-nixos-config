@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 let
   penpotDataDir = "/var/lib/penpot";
@@ -17,6 +17,36 @@ let
   ];
 in
 {
+  environment.systemPackages = [
+    (pkgs.writeShellApplication {
+      name = "penpot";
+      runtimeInputs = [
+        pkgs.sudo
+        pkgs.systemd
+      ];
+      text = ''
+        if [[ "$EUID" -eq 0 ]]; then
+          systemctl_cmd=(systemctl)
+        else
+          systemctl_cmd=(sudo systemctl)
+        fi
+
+        "''${systemctl_cmd[@]}" start \
+          docker-network-penpot.service \
+          docker-penpot-postgres.service \
+          docker-penpot-valkey.service \
+          docker-penpot-backend.service \
+          docker-penpot-mcp.service \
+          docker-penpot-exporter.service \
+          docker-penpot-frontend.service \
+          docker-penpot-mailcatch.service
+
+        echo "Penpot is starting: http://localhost:9001"
+        echo "Mailcatcher: http://localhost:9002"
+      '';
+    })
+  ];
+
   systemd.tmpfiles.rules = [
     "d ${penpotDataDir} 0750 root root - -"
     "d ${penpotDataDir}/assets 0750 root root - -"
@@ -52,6 +82,7 @@ in
 
   virtualisation.oci-containers.containers = {
     penpot-postgres = {
+      autoStart = false;
       image = "postgres:15";
       environment = {
         POSTGRES_INITDB_ARGS = "--data-checksums";
@@ -66,6 +97,7 @@ in
     };
 
     penpot-valkey = {
+      autoStart = false;
       image = "valkey/valkey:8.1";
       environment = {
         VALKEY_EXTRA_FLAGS = "--maxmemory 128mb --maxmemory-policy volatile-lfu";
@@ -74,6 +106,7 @@ in
     };
 
     penpot-backend = {
+      autoStart = false;
       image = "penpotapp/backend:${penpotVersion}";
       dependsOn = [
         "penpot-postgres"
@@ -105,11 +138,13 @@ in
     };
 
     penpot-mcp = {
+      autoStart = false;
       image = "penpotapp/mcp:${penpotVersion}";
       networks = [ "penpot" ];
     };
 
     penpot-exporter = {
+      autoStart = false;
       image = "penpotapp/exporter:${penpotVersion}";
       dependsOn = [
         "penpot-valkey"
@@ -123,6 +158,7 @@ in
     };
 
     penpot-frontend = {
+      autoStart = false;
       image = "penpotapp/frontend:${penpotVersion}";
       dependsOn = [
         "penpot-backend"
@@ -143,6 +179,7 @@ in
     };
 
     penpot-mailcatch = {
+      autoStart = false;
       image = "sj26/mailcatcher:latest";
       ports = [
         "127.0.0.1:9002:1080"

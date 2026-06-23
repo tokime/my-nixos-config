@@ -9,7 +9,6 @@
   virtualisation.oci-containers.backend = "docker";
 
   environment.systemPackages = with pkgs; [
-    docker
     docker-compose
   ];
 }

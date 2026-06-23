@@ -8,6 +8,8 @@
       "networkmanager"
       "video"
       "docker"
+      "uinput"
+      "adbusers"
     ];
     packages = with pkgs; [
       firefox

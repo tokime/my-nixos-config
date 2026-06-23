@@ -18,7 +18,6 @@ The system is managed with flakes. Home Manager is integrated as a NixOS module,
 │   ├── boot.nix
 │   ├── desktop.nix
 │   ├── networking.nix
-│   ├── noctalia.nix
 │   ├── nvidia.nix
 │   └── packages.nix
 └── users/

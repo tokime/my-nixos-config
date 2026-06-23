@@ -16,7 +16,6 @@ in
     wl-clipboard
     xwayland-satellite
     xwayland-run
-    gamescope
     fuzzel
     waybar
     zsh
@@ -31,11 +30,14 @@ in
     bubblewrap
     nvtopPackages.full
     kitty
+    libnotify
     obs-studio
     obsidian
     mpv
+    satty
     zip
     unzip
+    gamescope
     (llama-cpp.override { cudaSupport = true; })
   ];
 
