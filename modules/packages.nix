@@ -38,6 +38,7 @@ in
     zip
     unzip
     gamescope
+    numactl
     (llama-cpp.override { cudaSupport = true; })
   ];
 

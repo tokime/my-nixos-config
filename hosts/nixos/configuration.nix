@@ -23,6 +23,7 @@
     ../../modules/opencode.nix
     ../../modules/steam.nix
     ../../modules/lockscreen.nix
+    ../../modules/numad.nix
     ../../users/artem/nixos.nix
     ../../docker/penpot.nix
   ];
