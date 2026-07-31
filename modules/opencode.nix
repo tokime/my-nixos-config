@@ -4,16 +4,16 @@ let
   ohMyOpencode = pkgs.writeShellScriptBin "oh-my-opencode" ''
     exec ${pkgs.bun}/bin/bunx oh-my-opencode-slim@latest "$@"
   '';
-  
+
   omoShortcut = pkgs.writeShellScriptBin "omo" ''
     exec ${pkgs.bun}/bin/bunx oh-my-opencode-slim@latest "$@"
   '';
 in
 {
   environment.systemPackages = with pkgs; [
-    opencode  
-    bun       
-    tmux      
+    opencode
+    bun
+    tmux
     ohMyOpencode
     omoShortcut
   ];

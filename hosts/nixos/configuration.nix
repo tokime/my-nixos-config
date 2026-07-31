@@ -19,13 +19,12 @@
     ../../modules/networking.nix
     ../../modules/nvidia.nix
     ../../modules/packages.nix
+    ../../modules/krita.nix
     ../../modules/direnv.nix
     ../../modules/opencode.nix
     ../../modules/steam.nix
     ../../modules/lockscreen.nix
-    ../../modules/numad.nix
     ../../users/artem/nixos.nix
-    ../../docker/penpot.nix
   ];
 
   system.stateVersion = "26.05"; # Did you read the comment?

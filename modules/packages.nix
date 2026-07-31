@@ -31,15 +31,21 @@ in
     nvtopPackages.full
     kitty
     libnotify
+    ffmpeg
+    svt-av1
     obs-studio
     obsidian
     mpv
     satty
     zip
     unzip
+    uv
     gamescope
     numactl
+    hyprpicker
     (llama-cpp.override { cudaSupport = true; })
+    thunar
+    qbittorrent
   ];
 
   programs.nix-ld.enable = true;
